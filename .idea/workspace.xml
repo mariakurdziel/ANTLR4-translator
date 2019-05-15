@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="068491e8-db87-4a9a-a89a-adeded5f0c74" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/antlr4/cpp_grammar.g4" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/antlr4/cpp_grammar.g4" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -30,8 +30,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/antlr4/cpp_grammar.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="119">
+              <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -46,6 +46,7 @@
       <list>
         <option value="$PROJECT_DIR$/cpp_grammar.g4" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/antlr4/cpp_grammar.g4" />
       </list>
     </option>
   </component>
@@ -57,8 +58,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="260" />
-    <option name="y" value="80" />
+    <option name="x" value="-226" />
+    <option name="y" value="111" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
@@ -69,7 +70,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -92,6 +92,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -137,7 +138,20 @@
       <workItem from="1557306614055" duration="1268000" />
       <workItem from="1557312876240" duration="1392000" />
       <workItem from="1557325702640" duration="786000" />
-      <workItem from="1557352978895" duration="620000" />
+      <workItem from="1557352978895" duration="674000" />
+      <workItem from="1557424830399" duration="1095000" />
+      <workItem from="1557428166081" duration="34000" />
+      <workItem from="1557850582994" duration="599000" />
+      <workItem from="1557852800312" duration="598000" />
+      <workItem from="1557872007069" duration="622000" />
+      <workItem from="1557873487251" duration="149000" />
+      <workItem from="1557931584762" duration="1019000" />
+      <workItem from="1557932706272" duration="1976000" />
+      <workItem from="1557942015489" duration="1166000" />
+      <workItem from="1557945594760" duration="928000" />
+      <workItem from="1557947844317" duration="1273000" />
+      <workItem from="1557954968785" duration="1672000" />
+      <workItem from="1557956796207" duration="1697000" />
     </task>
     <task id="LOCAL-00001" summary="Basic project structure">
       <created>1557325848171</created>
@@ -146,16 +160,23 @@
       <option name="project" value="LOCAL" />
       <updated>1557325848171</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Basic project structure">
+      <created>1557353936906</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1557353936907</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4331000" />
+    <option name="totallyTimeSpent" value="17213000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2685325" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.33131617" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -204,8 +225,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/antlr4/cpp_grammar.g4">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="119">
+          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
         </state>
       </provider>
     </entry>
