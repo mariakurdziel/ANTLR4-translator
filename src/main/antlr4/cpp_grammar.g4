@@ -2,11 +2,13 @@ grammar cpp_grammar;
 
 /*Parser rules*/
 
+namespacedeclaration: USING NAMESPACE WORD SEMICOLON;//OK
 
+preprocessordirective: INCLUDE '<' LIBRARY '>' SEMICOLON; //OK
 
+variabledeclaration: simpletypespecifier VARIABLENAME '=' variablevalue SEMICOLON;
 
-
-printtext:'cout' LEFTSHIFT TEXT (LEFTSHIFT 'endl')? SEMICOLON;
+printtext:'cout' LEFTSHIFT (TEXT|VARIABLENAME) (LEFTSHIFT 'endl')? SEMICOLON;
 
 inputtext: 'cin' RIGHTSHIFT VARIABLENAME SEMICOLON;
 
@@ -24,10 +26,14 @@ simpletypespecifier:
    | AUTO
    ;
 
-VARIABLEVALUE:
+variablevalue:(NUMBER|  '\'' NONDIGIT '\''| );
 
 
 /* Lexer rules */
+USING: 'using';
+
+INCLUDE: '#include';
+
 EQUAL: '==';
 
 NOTEQUAL: '!=';
@@ -142,8 +148,6 @@ TRY: 'try';
 
 UNSIGNED: 'unsigned';
 
-USING: 'using';
-
 VIRTUAL: 'virtual';
 
 VOID: 'void';
@@ -202,6 +206,8 @@ MODASSIGN: '%=';
 
 SEMICOLON: ';';
 
+QUOTEMARK: '"';
+
 OPERATOR:
      NEW
    | DELETE
@@ -247,7 +253,13 @@ OPERATOR:
    ;
 fragment SIGN: [+-];
 
-fragment VARIABLENAME: (NONDIGIT)+ ;
+WORD: [a-zA-Z]+;
+
+VARIABLENAME: NONDIGIT+DIGIT*;
+
+LIBRARY: WORD('.h')?;
+
+TEXT : QUOTEMARK (WORD WHITESPACE)+ QUOTEMARK;
 
 fragment NONDIGIT: [a-zA-Z_];
 
@@ -256,8 +268,6 @@ NUMBER : DIGIT+ ([.,] DIGIT+)? ;
 fragment DIGIT: [0-9];
 
 LINECOMMENT:'//' ~ [\r\n]* -> skip;
-
-TEXT : ('['|'(') .*? (']'|')') ;
 
 BLOCKCOMMENT:'/*' .*? '*/' -> skip;
 
