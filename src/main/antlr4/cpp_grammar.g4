@@ -1,25 +1,59 @@
 grammar cpp_grammar;
 
+/*Parser rules*/
+
+
+
+printtext:
+
+
+
+simpletypespecifier:
+   CHAR
+   | BOOL
+   | SHORT
+   | INT
+   | LONG
+   | SIGNED
+   | UNSIGNED
+   | FLOAT
+   | DOUBLE
+   | VOID
+   | AUTO
+   ;
 
 
 
 /* Lexer rules */
+EQUAL: '==';
 
-AUTO
-   : 'auto'
-   ;
+NOTEQUAL: '!=';
 
-BOOL
-   : 'bool'
-   ;
+LESSEQUAL: '<=';
 
-BREAK
-   : 'break'
-   ;
+GREATEREQUAL: '>=';
 
-CASE
-   : 'case'
-   ;
+ANDAND: '&&'|'and';
+
+OROR: '||'| 'or';
+
+PLUSPLUS: '++';
+
+MINUSMINUS: '--';
+
+COMMA: ',';
+
+LEFTSHIFT: '<<';
+
+RIGHTSHIFT:'>>';
+
+AUTO: 'auto';
+
+BOOL: 'bool';
+
+BREAK: 'break';
+
+CASE: 'case';
 
 CATCH: 'catch';
 
@@ -217,6 +251,8 @@ NUMBER : DIGIT+ ([.,] DIGIT+)? ;
 fragment DIGIT: [0-9];
 
 LINECOMMENT:'//' ~ [\r\n]* -> skip;
+
+TEXT : ('['|'(') .*? (']'|')') ;
 
 BLOCKCOMMENT:'/*' .*? '*/' -> skip;
 
