@@ -4,9 +4,11 @@ grammar cpp_grammar;
 
 
 
-printtext:
 
 
+printtext:'cout' LEFTSHIFT TEXT (LEFTSHIFT 'endl')? SEMICOLON;
+
+inputtext: 'cin' RIGHTSHIFT VARIABLENAME SEMICOLON;
 
 simpletypespecifier:
    CHAR
@@ -22,6 +24,7 @@ simpletypespecifier:
    | AUTO
    ;
 
+VARIABLEVALUE:
 
 
 /* Lexer rules */
@@ -196,6 +199,8 @@ STARASSIGN: '*=';
 DIVASSIGN: '/=';
 
 MODASSIGN: '%=';
+
+SEMICOLON: ';';
 
 OPERATOR:
      NEW
