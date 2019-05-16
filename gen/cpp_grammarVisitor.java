@@ -1,4 +1,4 @@
-// Generated from cpp_grammar.g4 by ANTLR 4.7
+// Generated from C:/Users/maria/Desktop/lab4/translator/src/main/antlr4\cpp_grammar.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -9,24 +9,6 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * operations with no return type.
  */
 public interface cpp_grammarVisitor<T> extends ParseTreeVisitor<T> {
-	/**
-	 * Visit a parse tree produced by {@link cpp_grammarParser#function}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFunction(cpp_grammarParser.FunctionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link cpp_grammarParser#operation}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOperation(cpp_grammarParser.OperationContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link cpp_grammarParser#assignoperation}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAssignoperation(cpp_grammarParser.AssignoperationContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link cpp_grammarParser#namespacedeclaration}.
 	 * @param ctx the parse tree

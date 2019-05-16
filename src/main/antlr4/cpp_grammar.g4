@@ -2,11 +2,17 @@ grammar cpp_grammar;
 
 /*Parser rules*/
 
-namespacedeclaration: USING NAMESPACE WORD SEMICOLON;//OK
+function: simpletypespecifier VARIABLENAME LEFTPAREN (simpletypespecifier VARIABLENAME (COMMA)?)* RIGHTPAREN LEFTBRACE (operation)* (assignoperation)* (variabledeclaration)* (printtext)* (inputtext)* (RETURN (VARIABLENAME|variablevalue) SEMICOLON)? RIGHTBRACE;
 
-preprocessordirective: INCLUDE '<' LIBRARY '>' SEMICOLON; //OK
+operation: (simpletypespecifier)? VARIABLENAME ASSIGN (VARIABLENAME|NUMBER|NONDIGIT) (PLUS| MINUS|STAR|DIV|MOD|CARET|AND|OR|TILDE|NOT) (VARIABLENAME|NUMBER|NONDIGIT) SEMICOLON;
 
-variabledeclaration: simpletypespecifier VARIABLENAME '=' variablevalue SEMICOLON;
+assignoperation: VARIABLENAME (PLUSASSIGN|MINUSASSIGN|STARASSIGN|DIVASSIGN|MODASSIGN) (VARIABLENAME|NUMBER|NONDIGIT) SEMICOLON;
+
+namespacedeclaration: USING NAMESPACE VARIABLENAME SEMICOLON;//OK
+
+preprocessordirective: INCLUDE '<' LIBRARY '>'; //OK
+
+variabledeclaration: simpletypespecifier VARIABLENAME '=' variablevalue SEMICOLON; //OK
 
 printtext:'cout' LEFTSHIFT (TEXT|VARIABLENAME) (LEFTSHIFT 'endl')? SEMICOLON;
 
@@ -253,13 +259,13 @@ OPERATOR:
    ;
 fragment SIGN: [+-];
 
-WORD: [a-zA-Z]+;
+TEXT : QUOTEMARK (WORD (WHITESPACE)?)+ QUOTEMARK;
 
-VARIABLENAME: NONDIGIT+DIGIT*;
+VARIABLENAME: WORD DIGIT*;
+
+WORD: NONDIGIT+;
 
 LIBRARY: WORD('.h')?;
-
-TEXT : QUOTEMARK (WORD WHITESPACE)+ QUOTEMARK;
 
 fragment NONDIGIT: [a-zA-Z_];
 
