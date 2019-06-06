@@ -2,21 +2,91 @@ grammar cpp_grammar;
 
 /*Parser rules*/
 
-function: simpletypespecifier VARIABLENAME LEFTPAREN (simpletypespecifier VARIABLENAME (COMMA)?)* RIGHTPAREN LEFTBRACE (operation)* (assignoperation)* (variabledeclaration)* (printtext)* (inputtext)* (RETURN (VARIABLENAME|variablevalue) SEMICOLON)? RIGHTBRACE;
+classdeclaration: CLASS VARIABLENAME LEFTBRACE (accessoperator COLON ((variabledeclaration|functiondeclaration)).*).* RIGHTBRACE;
 
-operation: (simpletypespecifier)? VARIABLENAME ASSIGN (VARIABLENAME|NUMBER|NONDIGIT) (PLUS| MINUS|STAR|DIV|MOD|CARET|AND|OR|TILDE|NOT) (VARIABLENAME|NUMBER|NONDIGIT) SEMICOLON;
+classprefix: VARIABLENAME COLON COLON;
 
-assignoperation: VARIABLENAME (PLUSASSIGN|MINUSASSIGN|STARASSIGN|DIVASSIGN|MODASSIGN) (VARIABLENAME|NUMBER|NONDIGIT) SEMICOLON;
+enumdeclaration: ENUM VARIABLENAME LEFTBRACE (VARIABLENAME COMMA).* RIGHTBRACE;
+
+function: simpletypespecifier VARIABLENAME LEFTPAREN (simpletypespecifier VARIABLENAME (COMMA)?)* RIGHTPAREN LEFTBRACE body RIGHTBRACE;
+
+switchloop: SWITCH LEFTPAREN VARIABLENAME RIGHTPAREN LEFTBRACE (CASE variablevalue COLON (assignoperation|operation|printtext) BREAK SEMICOLON).* (DEFAULT COLON (assignoperation|operation|printtext))? RIGHTBRACE;
+
+forloop: FOR LEFTPAREN (VARIABLENAME (ASSIGN NUMBER)?)? SEMICOLON (VARIABLENAME (LESSEQUAL|GREATEREQUAL|NOTEQUAL|LESS|GREATER) NUMBER)? SEMICOLON ((PLUSPLUS|MINUSMINUS) VARIABLENAME)?  (VARIABLENAME(PLUSPLUS|MINUSMINUS))? LEFTBAREN BODY;
+
+whileloop: WHILE  condition body;
+
+ifoperation: IF condition BODY;
+
+body: LEFTBRACE
+(operation
+|assignoperation
+|ifoperation
+|printtext
+|inputtext
+|variabledeclaration
+|ifoperation
+|whileloop
+|forloop
+|table
+|switchloop
+|tabledeclaration).*
+RIGHTBRACE;
+
+operation: (simpletypespecifier)? VARIABLENAME ASSIGN
+(VARIABLENAME
+|NUMBER
+|NONDIGIT)
+(PLUS
+|MINUS
+|STAR
+|DIV
+|MOD
+|CARET
+|AND
+|OR
+|TILDE
+|NOT)
+(VARIABLENAME
+|NUMBER
+|NONDIGIT)
+SEMICOLON;
+
+assignoperation: VARIABLENAME
+(PLUSASSIGN
+|MINUSASSIGN
+|STARASSIGN
+|DIVASSIGN
+|MODASSIGN)
+(VARIABLENAME
+|NUMBER
+|NONDIGIT)
+SEMICOLON;
+
+condition:LEFTPAREN VARIABLENAME(((PLUS|MINUS|MOD|STAR|)VARIABLENAME).* )?((EQUAL|NOTEQUAL) (VARIABLENAME|NUMBER))? RIGHTPAREN;
 
 namespacedeclaration: USING NAMESPACE VARIABLENAME SEMICOLON;//OK
 
 preprocessordirective: INCLUDE '<' LIBRARY '>'; //OK
+
+functiondeclaration:  simpletypespecifier VARIABLENAME LEFTPAREN (simpletypespecifier VARIABLENAME (COMMA)?)* RIGHTPAREN SEMICOLON;
+
+tabledeclaration: table ASSIGN LEFTBRACE (NUMBER).*(COMMA)* RIGHTBRACE SEMICOLON;
 
 variabledeclaration: simpletypespecifier VARIABLENAME '=' variablevalue SEMICOLON; //OK
 
 printtext:'cout' LEFTSHIFT (TEXT|VARIABLENAME) (LEFTSHIFT 'endl')? SEMICOLON;
 
 inputtext: 'cin' RIGHTSHIFT VARIABLENAME SEMICOLON;
+
+table: simpletypespecifier VARIABLENAME LEFTBRACKET (NUMBER|VARIABLENAME) RIGHTBRACKET (SEMICOLON)?;
+
+accessoperator:
+(PRIVATE
+|PUBLIC
+|PROTECTED)
+;
+
 
 simpletypespecifier:
    CHAR
@@ -211,6 +281,8 @@ DIVASSIGN: '/=';
 MODASSIGN: '%=';
 
 SEMICOLON: ';';
+
+COLON: ':';
 
 QUOTEMARK: '"';
 

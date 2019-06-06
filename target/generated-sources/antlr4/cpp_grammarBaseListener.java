@@ -15,6 +15,42 @@ public class cpp_grammarBaseListener implements cpp_grammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterClassdeclaration(cpp_grammarParser.ClassdeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitClassdeclaration(cpp_grammarParser.ClassdeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterClassprefix(cpp_grammarParser.ClassprefixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitClassprefix(cpp_grammarParser.ClassprefixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEnumdeclaration(cpp_grammarParser.EnumdeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEnumdeclaration(cpp_grammarParser.EnumdeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFunction(cpp_grammarParser.FunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -22,6 +58,66 @@ public class cpp_grammarBaseListener implements cpp_grammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunction(cpp_grammarParser.FunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSwitchloop(cpp_grammarParser.SwitchloopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSwitchloop(cpp_grammarParser.SwitchloopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterForloop(cpp_grammarParser.ForloopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitForloop(cpp_grammarParser.ForloopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterWhileloop(cpp_grammarParser.WhileloopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitWhileloop(cpp_grammarParser.WhileloopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIfoperation(cpp_grammarParser.IfoperationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIfoperation(cpp_grammarParser.IfoperationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBody(cpp_grammarParser.BodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBody(cpp_grammarParser.BodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -51,6 +147,18 @@ public class cpp_grammarBaseListener implements cpp_grammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCondition(cpp_grammarParser.ConditionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCondition(cpp_grammarParser.ConditionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterNamespacedeclaration(cpp_grammarParser.NamespacedeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -70,6 +178,30 @@ public class cpp_grammarBaseListener implements cpp_grammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitPreprocessordirective(cpp_grammarParser.PreprocessordirectiveContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctiondeclaration(cpp_grammarParser.FunctiondeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctiondeclaration(cpp_grammarParser.FunctiondeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTabledeclaration(cpp_grammarParser.TabledeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTabledeclaration(cpp_grammarParser.TabledeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -106,6 +238,30 @@ public class cpp_grammarBaseListener implements cpp_grammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitInputtext(cpp_grammarParser.InputtextContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTable(cpp_grammarParser.TableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTable(cpp_grammarParser.TableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAccessoperator(cpp_grammarParser.AccessoperatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAccessoperator(cpp_grammarParser.AccessoperatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
