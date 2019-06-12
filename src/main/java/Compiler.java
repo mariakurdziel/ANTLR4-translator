@@ -11,7 +11,8 @@ public class Compiler {
         CommonTokenStream tokens = createToken(sourceCode);
 
         cpp_grammarParser parser = new cpp_grammarParser(tokens);
-        ParseTree parseTree = parser.getContext().getChild(0);
+        //System.out.println(parser.getContext());
+        ParseTree parseTree = parser.file();
         int size = 1024;
         generateOutput(writer, parseTree, size);
 

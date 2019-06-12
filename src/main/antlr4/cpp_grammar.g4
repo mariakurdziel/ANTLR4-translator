@@ -2,92 +2,131 @@ grammar cpp_grammar;
 
 /*Parser rules*/
 
-classdeclaration: CLASS VARIABLENAME LEFTBRACE (accessoperator COLON ((variabledeclaration|functiondeclaration)).*).* RIGHTBRACE;
+file: preprocessordirective namespacedeclaration (classdeclaration| (function function));
 
-classprefix: VARIABLENAME COLON COLON;
+classdeclaration: classsign variablename extendsop stylesign accessection1 accessection2 stylesign;
 
-enumdeclaration: ENUM VARIABLENAME LEFTBRACE (VARIABLENAME COMMA).* RIGHTBRACE;
+accessection1:accessoperator colon variabledeclaration variabledeclaration constructor destructor;
 
-function: simpletypespecifier VARIABLENAME LEFTPAREN (simpletypespecifier VARIABLENAME (COMMA)?)* RIGHTPAREN LEFTBRACE body RIGHTBRACE;
+accessection2:accessoperator colon variabledeclaration function noargfunction;
 
-switchloop: SWITCH LEFTPAREN VARIABLENAME RIGHTPAREN LEFTBRACE (CASE variablevalue COLON (assignoperation|operation|printtext) BREAK SEMICOLON).* (DEFAULT COLON (assignoperation|operation|printtext))? RIGHTBRACE;
+extendsop: colon accessoperator variablename;
 
-forloop: FOR LEFTPAREN (VARIABLENAME (ASSIGN NUMBER)?)? SEMICOLON (VARIABLENAME (LESSEQUAL|GREATEREQUAL|NOTEQUAL|LESS|GREATER) NUMBER)? SEMICOLON ((PLUSPLUS|MINUSMINUS) VARIABLENAME)?  (VARIABLENAME(PLUSPLUS|MINUSMINUS))? LEFTBAREN BODY;
-
-whileloop: WHILE  condition body;
-
-ifoperation: IF condition BODY;
-
-body: LEFTBRACE
-(operation
-|assignoperation
-|ifoperation
-|printtext
+body: stylesign
+(printtext
+|pointerassign
 |inputtext
 |variabledeclaration
-|ifoperation
+|operation
 |whileloop
 |forloop
 |table
 |switchloop
-|tabledeclaration).*
-RIGHTBRACE;
+|tabledeclaration
+)*
+(exproperator (variablename|variablevalue) stylesign)?
+stylesign;
 
-operation: (simpletypespecifier)? VARIABLENAME ASSIGN
-(VARIABLENAME
-|NUMBER
-|NONDIGIT)
-(PLUS
-|MINUS
-|STAR
-|DIV
-|MOD
-|CARET
-|AND
-|OR
-|TILDE
-|NOT)
-(VARIABLENAME
-|NUMBER
-|NONDIGIT)
-SEMICOLON;
+enumdeclaration: exproperator stylesign (variablename stylesign).* stylesign;
 
-assignoperation: VARIABLENAME
-(PLUSASSIGN
-|MINUSASSIGN
-|STARASSIGN
-|DIVASSIGN
-|MODASSIGN)
-(VARIABLENAME
-|NUMBER
-|NONDIGIT)
-SEMICOLON;
+constructor: classprefix variablename stylesign (simpletypespecifier variablename(stylesign)?)* stylesign body;
 
-condition:LEFTPAREN VARIABLENAME(((PLUS|MINUS|MOD|STAR|)VARIABLENAME).* )?((EQUAL|NOTEQUAL) (VARIABLENAME|NUMBER))? RIGHTPAREN;
+destructor:'~' classprefix classname '(){}';
 
-namespacedeclaration: USING NAMESPACE VARIABLENAME SEMICOLON;//OK
+function: (specialtypes)* simpletypespecifier (classprefix)? variablename stylesign (simpletypespecifier variablename(stylesign)?)* stylesign body;
+
+noargfunction: (specialtypes)* simpletypespecifier (classprefix)? variablename stylesign stylesign body;
+
+classprefix: classname colon colon;
+
+switchloop: exproperator stylesign variablename stylesign stylesign (exproperator variablevalue stylesign (operation|printtext) exproperator stylesign).* (exproperator stylesign (operation|printtext))? stylesign;
+
+ifstatement: ifoperator condition body;
+
+whileloop: exproperator  condition body;
+
+forloop: exproperator stylesign (variablename(logicoperators variablevalue)?)? stylesign (variablename (logicoperators) variablevalue)? stylesign (decincoperator variablename)?  (variablename decincoperator)? stylesign body;
+
+operation: (simpletypespecifier)? variablename (assignoperatior|decincoperator) (variablename|variablevalue|decincoperator).*  (simpleoperators|logicoperators).* (variablename|variablevalue).* stylesign;
+
+condition:stylesign variablename(((simpleoperators)variablename).* )?((logicoperators) (variablename|variablevalue))? stylesign;
+
+namespacedeclaration: USING NAMESPACE 'std;';//OK
+
+pointerassign: variablename pointer variablename assignoperatior variablename stylesign;
 
 preprocessordirective: INCLUDE '<' LIBRARY '>'; //OK
 
-functiondeclaration:  simpletypespecifier VARIABLENAME LEFTPAREN (simpletypespecifier VARIABLENAME (COMMA)?)* RIGHTPAREN SEMICOLON;
+functiondeclaration:  simpletypespecifier variablename stylesign (simpletypespecifier variablename (stylesign)?)* stylesign stylesign;
 
-tabledeclaration: table ASSIGN LEFTBRACE (NUMBER).*(COMMA)* RIGHTBRACE SEMICOLON;
+tabledeclaration: table logicoperators stylesign (variablevalue).*(stylesign)* stylesign stylesign;
 
-variabledeclaration: simpletypespecifier VARIABLENAME '=' variablevalue SEMICOLON; //OK
+variabledeclaration: simpletypespecifier variablename logicoperators variablevalue stylesign; //OK
 
-printtext:'cout' LEFTSHIFT (TEXT|VARIABLENAME) (LEFTSHIFT 'endl')? SEMICOLON;
+printtext: cincout textsign (text|variablename) (textsign cincout)? stylesign;
 
-inputtext: 'cin' RIGHTSHIFT VARIABLENAME SEMICOLON;
+inputtext: cincout textsign variablename (textsign cincout)? stylesign;
 
-table: simpletypespecifier VARIABLENAME LEFTBRACKET (NUMBER|VARIABLENAME) RIGHTBRACKET (SEMICOLON)?;
+table: simpletypespecifier variablename stylesign (variablevalue|variablename) stylesign (stylesign)?;
+
+specialtypes:
+STATIC;
 
 accessoperator:
 (PRIVATE
 |PUBLIC
 |PROTECTED)
 ;
+simpleoperators:
+PLUS
+|MINUS
+|MOD
+|STAR
+|DIV;
 
+assignoperatior:
+PLUSASSIGN
+|MINUSASSIGN
+|STARASSIGN
+|DIVASSIGN
+|MODASSIGN
+|ASSIGN;
 
+decincoperator:
+PLUSPLUS
+|MINUSMINUS;
+
+cincout:
+CIN
+|COUT
+|ENDL;
+
+ifoperator: IF;
+exproperator:
+WHILE
+|FOR
+|SWITCH
+|CASE
+|ENUM
+|BREAK
+|DEFAULT
+|RETURN
+;
+classsign: CLASS;
+
+pointer:POINTER;
+
+logicoperators:
+EQUAL
+|NOTEQUAL
+|AND
+|OR
+|LESSEQUAL
+|GREATEREQUAL
+|ASSIGN
+|LESS
+|GREATER
+ ;
 simpletypespecifier:
    CHAR
    | BOOL
@@ -102,11 +141,37 @@ simpletypespecifier:
    | AUTO
    ;
 
+ textsign:
+  RIGHTSHIFT
+ |LEFTSHIFT;
+
+stylesign:
+COMMA
+|COLON
+|SEMICOLON
+|LEFTPAREN
+|RIGHTPAREN
+|LEFTBRACKET
+|RIGHTBRACKET
+|LEFTBRACE
+|RIGHTBRACE
+;
+colon:COLON;
+
 variablevalue:(NUMBER|  '\'' NONDIGIT '\''| );
+
+classname:VARIABLENAME;
+
+variablename:VARIABLENAME;
+
+text: TEXT;
+
 
 
 /* Lexer rules */
 USING: 'using';
+
+ENDL: 'endl';
 
 INCLUDE: '#include';
 
@@ -149,6 +214,10 @@ CLASS: 'class';
 CONST: 'const';
 
 CONTINUE: 'continue';
+
+CIN: 'cin';
+
+COUT: 'cout';
 
 DEFAULT: 'default';
 
@@ -213,8 +282,6 @@ STATIC: 'static';
 STRUCT: 'struct';
 
 SWITCH: 'switch';
-
-THIS: 'this';
 
 THROW: 'throw';
 
@@ -286,6 +353,8 @@ COLON: ':';
 
 QUOTEMARK: '"';
 
+POINTER: '->';
+
 OPERATOR:
      NEW
    | DELETE
@@ -325,7 +394,6 @@ OPERATOR:
    | '--'
    | ','
    | '->*'
-   | '->'
    | '(' ')'
    | '[' ']'
    ;
