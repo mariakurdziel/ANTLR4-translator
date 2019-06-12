@@ -1,0 +1,18 @@
+#include <iostream.h>
+
+using namespace std;
+
+int fun(int a,int b){
+  for(x=0;x<=3;x++){
+   cout<<"Hello world"<<endl;
+  }
+  return 0;
+ }
+
+ int main(int x){
+   cin>>x>>endl;
+   cout<<x<<endl;
+   
+   return x;
+   
+}

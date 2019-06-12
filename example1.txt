@@ -1,0 +1,26 @@
+#include <iostream.h>
+using namespace std;
+                
+  class Car: public Vehicle {
+              
+      public:
+      int speed=0;
+      double price=0;
+		
+      Car::Car(int speed){
+        this->speed=speed;
+       }
+
+      ~Car::Car(){}
+              
+       private:
+       int year=0;
+              
+       void Car::setYear(int year){
+         this-> year=year;
+       }
+             
+        int Car::getYear( ){
+          return year;
+       }
+     } 
