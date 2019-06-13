@@ -8,43 +8,21 @@ import java.util.stream.Stream;
 
 public class App {
   public static void main(String[] args) {
-    String outputFile = "wynik.txt";
-    String testCode =
-        "#include <iostream.h>\n"
-            + "\n"
-            + "using namespace std;\n"
-            + "\n"
-            + "int fun(int a,int b){\n"
-            + "  for(x=0;x<=3;x++){\n"
-            + "   cout<<\"Hello world\"<<endl;\n"
-            + "  }\n"
-            + "  return 0;\n"
-            + " }\n"
-            + "\n"
-            + " int main(int x){\n"
-            + "   cin>>x>>endl;\n"
-            + "   cout<<x<<endl;\n"
-            + "   \n"
-            + "   return x;\n"
-            + "   \n"
-            + "}";
-    String testCodeFromFile = readFromFile("F:\\example2.txt");
+
+    String testCodeFromFile = readFromFile("example1.txt");
     BufferedWriter bufferedWriter;
-    BufferedWriter buf2;
     try {
-      bufferedWriter = prepareOutput(outputFile);
-      buf2 = prepareOutput("wynik_z_pliku.txt");
+      bufferedWriter = prepareOutput("wynik_z_pliku.txt");
     } catch (IOException ex) {
       System.out.println("Problem z plikiem wyjsciowym");
       return;
     }
 
-    Compiler.compileCode(testCode, bufferedWriter);
-    Compiler.compileCode(testCodeFromFile, buf2);
+    /*Compiler.compileCode(testCode, bufferedWriter);*/
+    Compiler.compileCode(testCodeFromFile, bufferedWriter);
 
     try {
       bufferedWriter.close();
-      buf2.close();
     } catch (IOException e) {
       e.printStackTrace();
     }

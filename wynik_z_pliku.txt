@@ -1,0 +1,19 @@
+public class Car extends Vehicle{
+
+ public int speed=0;
+ public double price=0;
+
+ public Car(int speed){
+  this.speed=speed;
+ }
+ private int year=0;
+
+ private void setYear(int year){
+   this.year=year;
+  }
+
+  private int getYear(){
+    return year;
+   }
+
+  }
